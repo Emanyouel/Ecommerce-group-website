@@ -4,14 +4,8 @@ import Iphone11b from "../assets/Iphone-11-black.png";
 import Iphone11w from "../assets/Iphone-white.png";
 import Iphoner from "../assets/Iphone-red.png";
 import Iphonebl from "../assets/Iphone-blue.png";
-import Navbar from "../components/Navbar.jsx";
-import RightCartBar from "../components/BagArea.jsx";
-import { Link, useParams } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { addToBag } from "../store/bagSlice";
 
-const items = [
+export const productsList = [
   {
     id: 1,
     name: "Apple Watch",
@@ -134,112 +128,4 @@ const items = [
   },
 ];
 
-function ItemView() {
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const item = items.find((product) => product.id === Number(id));
-
-  if (!item) {
-    return <p className="p-10">Item not found</p>;
-  }
-
-  return (
-    <div key={item.id} className="flex min-h-screen bg-gray-100">
-      <Navbar />
-      <main className="flex-1 p-6">
-        <div className="mt-10 w-230">
-          <div className="max-w-6xl mx-auto p-8">
-            <Link to="/">
-              <button className="text-sm text-gray-600 mb-6 flex items-center gap-2 cursor-pointer">
-                ← Back
-              </button>
-            </Link>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div className="flex gap-6">
-                <div className="flex flex-col gap-4">
-                  <div>
-                    <div className="w-16 h-16 mb-5 bg-white rounded-xl flex items-center justify-center cursor-pointer">
-                      <img
-                        src={item.image1}
-                        alt={item.name}
-                        className="w-12 h-12 object-contain"
-                      />
-                    </div>
-
-                    <div className="w-16 h-16 mb-5 bg-white rounded-xl flex items-center justify-center cursor-pointer">
-                      <img
-                        src={item.image2}
-                        alt={item.name}
-                        className="w-12 h-12 object-contain"
-                      />
-                    </div>
-
-                    <div className="w-16 h-16 bg-white mb-5 rounded-xl flex items-center justify-center cursor-pointer">
-                      <img
-                        src={item.image3}
-                        alt={item.name}
-                        className="w-12 h-12 object-contain"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-white rounded-2xl shadow p-10 flex items-center justify-center">
-                  <img
-                    key={item.id}
-                    src={item.image3}
-                    alt={item.name}
-                    className="w-75 h-75 object-contain"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <h1 className="text-3xl font-bold">{item.name}</h1>
-                <p className="text-gray-500 mt-1">{item.model}</p>
-
-                <div className="flex items-center gap-3 mt-3">
-                  <div className="flex text-green-500 text-lg">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar key={i} />
-                    ))}
-                  </div>
-                  <span className="text-sm text-gray-600">
-                    {item.rating} / 5
-                  </span>
-                </div>
-
-                <p className="text-2xl font-bold mt-6">${item.price}</p>
-
-                <p className="text-gray-600 mt-4 leading-relaxed">
-                  {item.ShortDescription}
-                </p>
-
-                <button
-                  onClick={() => dispatch(addToBag(item))}
-                  className="mt-6 bg-black text-white px-6 py-3 rounded-xl flex items-center gap-2 hover:bg-gray-800 transition"
-                >
-                  Add to Bag
-                </button>
-              </div>
-            </div>
-
-            <hr className="my-12" />
-
-            <div>
-              <h2 className="text-xl font-semibold mb-4">Description</h2>
-
-              <p className="text-gray-600 leading-relaxed">
-                {item.description}
-              </p>
-            </div>
-          </div>
-        </div>
-      </main>
-      <RightCartBar />
-    </div>
-  );
-}
-
-export default ItemView;
+export default productsList;

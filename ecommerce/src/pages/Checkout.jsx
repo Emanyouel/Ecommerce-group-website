@@ -15,39 +15,15 @@ import PaymentMethodForm from "../components/PaymentMethodForm";
 import PaymentMethodDisplay from "../components/PaymentMethodDisplay";
 
 // Sample cart data - you can replace this with Redux state
-const sampleCartItems = [
-  {
-    id: 1,
-    name: "Apple Watch Series 5 SE",
-    price: 529.99,
-    quantity: 1,
-    image: "/src/assets/Watch-img.png",
-  },
-  {
-    id: 2,
-    name: "Sony ZX330BT Headphones",
-    price: 30.99,
-    quantity: 2,
-    image: "/src/assets/Headphones-img.png",
-  },
-  {
-    id: 3,
-    name: "iPhone 11",
-    price: 619.99,
-    quantity: 1,
-    image: "/src/assets/Iphone-11-black.png",
-  },
-];
 
 const Checkout = () => {
+  const cartItems = useSelector((state) => state.bag.items);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const savedAddress = useSelector((state) => state.checkout.address);
   const savedCards = useSelector((state) => state.checkout.savedCards);
   const defaultCardId = useSelector((state) => state.checkout.defaultCardId);
   const useSameAddress = useSelector((state) => state.checkout.useSameAddress);
-
-  const [cartItems] = useState(sampleCartItems);
 
   const subtotal = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -89,7 +65,7 @@ const Checkout = () => {
                     className="flex items-center gap-4 pb-4 border-b border-gray-200 last:border-b-0"
                   >
                     <img
-                      src={item.image}
+                      src={item.ProductImage}
                       alt={item.name}
                       className="w-20 h-20 object-cover rounded-lg"
                     />
